@@ -7,6 +7,11 @@ token = os.environ['DISCORD_BOT_TOKEN']
 
 
 @bot.event
+async def on_ready():
+    game = discord.Game(".help | Artemis.exe")
+    await client.change_presence(status=discord.Status.idle, activity=game)
+
+@bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
